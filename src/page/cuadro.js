@@ -429,9 +429,8 @@ function Cuadro() {
                       marginTop: 0,
                     }}
                   >
-                    {medicamentosMorning
-                      .slice(0, 4)
-                      .map((medicamento, index) => (
+                    {morningMedicamento && Array.isArray(morningMedicamento) &&
+                      morningMedicamento.slice(0, 4).map((medicamento, index) => (
                         <p
                           key={index}
                           style={{
@@ -482,9 +481,8 @@ function Cuadro() {
                       marginTop: 0,
                     }}
                   >
-                    {medicamentosMorning
-                      .slice(0, 4)
-                      .map((medicamento, index) => (
+                    {morningMedicamento && Array.isArray(morningMedicamento) &&
+                      morningMedicamento.slice(0, 4).map((medicamento, index) => (
                         <p
                           key={index}
                           style={{
@@ -533,9 +531,8 @@ function Cuadro() {
                       marginTop: 0,
                     }}
                   >
-                    {medicamentosMorning
-                      .slice(0, 4)
-                      .map((medicamento, index) => (
+                    {morningMedicamento && Array.isArray(morningMedicamento) &&
+                      morningMedicamento.slice(0, 4).map((medicamento, index) => (
                         <p
                           key={index}
                           style={{
@@ -545,7 +542,7 @@ function Cuadro() {
                             paddingTop: 0,
                           }}
                         >
-                          {medicamento.hora}
+                          {medicamento.horamorning}
                         </p>
                       ))}
                   </div>
@@ -585,9 +582,8 @@ function Cuadro() {
                       marginTop: 0,
                     }}
                   >
-                    {medicamentosMorning
-                      .slice(0, 4)
-                      .map((medicamento, index) => (
+                    {morningMedicamento && Array.isArray(morningMedicamento) &&
+                      morningMedicamento.slice(0, 4).map((medicamento, index) => (
                         <p
                           key={index}
                           style={{
@@ -687,9 +683,8 @@ function Cuadro() {
                       marginTop: 0,
                     }}
                   >
-                    {medicamentosMorning
-                      .slice(0, 4)
-                      .map((medicamento, index) => (
+                    {morningMedicamento && Array.isArray(morningMedicamento) &&
+                      morningMedicamento.slice(0, 4).map((medicamento, index) => (
                         <button
                           style={{ display: "flex" }}
                           key={index}
@@ -803,9 +798,8 @@ function Cuadro() {
                       marginTop: 0,
                     }}
                   >
-                    {mediodiaMedicamento
-                      .slice(0, 4)
-                      .map((medicamento, index) => (
+                    {mediodiaMedicamento && Array.isArray(mediodiaMedicamento) &&
+                      mediodiaMedicamento.slice(0, 4).map((medicamento, index) => (
                         <p
                           key={index}
                           style={{
@@ -857,9 +851,8 @@ function Cuadro() {
                       marginTop: 0,
                     }}
                   >
-                    {mediodiaMedicamento
-                      .slice(0, 4)
-                      .map((medicamento, index) => (
+                    {mediodiaMedicamento && Array.isArray(mediodiaMedicamento) &&
+                      mediodiaMedicamento.slice(0, 4).map((medicamento, index) => (
                         <p
                           key={index}
                           style={{
@@ -965,9 +958,8 @@ function Cuadro() {
                       marginTop: 0,
                     }}
                   >
-                    {mediodiaMedicamento
-                      .slice(0, 4)
-                      .map((medicamento, index) => (
+                    {mediodiaMedicamento && Array.isArray(mediodiaMedicamento) &&
+                      mediodiaMedicamento.slice(0, 4).map((medicamento, index) => (
                         <p
                           key={index}
                           style={{
@@ -1019,9 +1011,8 @@ function Cuadro() {
                       marginTop: 0,
                     }}
                   >
-                    {mediodiaMedicamento
-                      .slice(0, 4)
-                      .map((medicamento, index) => (
+                    {mediodiaMedicamento && Array.isArray(mediodiaMedicamento) &&
+                      mediodiaMedicamento.slice(0, 4).map((medicamento, index) => (
                         <p
                           key={index}
                           style={{
@@ -1073,9 +1064,8 @@ function Cuadro() {
                       marginTop: 0,
                     }}
                   >
-                    {mediodiaMedicamento
-                      .slice(0, 4)
-                      .map((medicamento, index) => {
+                    {mediodiaMedicamento && Array.isArray(mediodiaMedicamento) &&
+                      mediodiaMedicamento.slice(0, 4).map((medicamento, index) => {
                         const horaDelMedicamento = medicamento.hora;
                         const horaActual = new Date().getHours();
                         const diferenciaHora = horaDelMedicamento - horaActual;

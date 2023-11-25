@@ -26,9 +26,10 @@ const obtenerMorningId = (req, res) => {
     });
 };
 
+
 const insertarMornig = (req, res) => {
     const {id_medic, hora, fecha, estatus} = req.body;
-    connection.query('INSERT INTO morning (id_medic, hora, fecha, estatus) VALUES (?, ?, ?, ?)', [id_medic, hora, fecha, estatus], (error, results) =>{
+    connection.query('INSERT INTO morning (id_medic, horamorning, fecha, estatus) VALUES (?, ?, ?, ?)', [id_medic, hora, fecha, estatus], (error, results) =>{
         if(error){
             console.error('Error al insertar el medicamento de mañana', error);
             res.status(500).json({error:'Error al agregar medicina'});
