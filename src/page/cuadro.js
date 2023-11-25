@@ -37,6 +37,7 @@ function Cuadro() {
   const [morningMedicamento, setMorningMedicamento] = useState([]);
   const [nocheMedicamento, setNocheMedicamento] = useState([]);
   const [tardeMedicamento, setTardeMedicamento] = useState([]);
+  const [cualquieraMedicamento, setCualquieraMedicamento] = useState ([]);
   const [tablaMedicamentosToma0, setTablaMedicamentosToma0] = useState([]);
   const [fecha, setFecha] = useState(
     window.localStorage.getItem("fecha") || null
@@ -93,6 +94,29 @@ function Cuadro() {
           console.error("Error al configurar la solicitud:", error.message);
         }}
       }, []);
+
+      useEffect(() => {
+        try {
+          // Tu código Axios aquí
+          Axios.get(`http://localhost:3001/cualquiera`)
+          .then((respuesta) => {
+            setCualquieraMedicamento(respuesta.data.listacualquiera);
+          })
+          .catch((error) => console.error(error));
+      
+        } catch (error) {
+          if (error.response) {
+            // La solicitud fue realizada y el servidor respondió con un código de estado diferente de 2xx
+            console.error("Error de respuesta del servidor:", error.response.data);
+          } else if (error.request) {
+            // La solicitud fue realizada, pero no se recibió una respuesta
+            console.error("No se recibió respuesta del servidor");
+          } else {
+            // Algo sucedió en la configuración de la solicitud que desencadenó un error
+            console.error("Error al configurar la solicitud:", error.message);
+          }}
+        }, []);
+  
 
     useEffect(() => {
       try {
@@ -173,9 +197,16 @@ function Cuadro() {
             }${horaIncrementada}:00:00`, // Formatear la hora
             fecha: fechaSiguiente.toLocaleDateString(), // Actualizar la fecha si es necesario
           };
+          Axios.post('http://localhost:3001/morning', {
+            id_medic: nuevaInstanciaMorning.id_medicina,
+            hora: nuevaInstanciaMorning.hora,
+            fecha: nuevaInstanciaMorning.fecha,
+            estatus: 0  // Aquí estás enviando el estado actual del checkbox
+          }).then(() => {
+            console.log("Medicamento agregado")
+          })
           nuevosMedicamentosMorning.push(nuevaInstanciaMorning);
-          // Axios.post('http:localhost:3001/insermorning')
-          //   .then()
+          
           alert(nuevosMedicamentosMorning);
         } else if (horaIncrementada >= 12 && horaIncrementada < 18) {
           const nuevaInstanciaMediodia = {
@@ -226,6 +257,14 @@ function Cuadro() {
             }${horaIncrementada}:00:00`, // Formatear la hora
             fecha: fechaSiguiente.toLocaleDateString(), // Actualizar la fecha si es necesario
           };
+          Axios.post('http://localhost:3001/noche', {
+            id_medic: nuevaInstanciaNight.id_medicina,
+            hora: nuevaInstanciaNight.hora,
+            fecha: nuevaInstanciaNight.fecha,
+            estatus: 0  // Aquí estás enviando el estado actual del checkbox
+          }).then(() => {
+            console.log("Medicamento agregado")
+          })
           nuevosMedicamentosNight.push(nuevaInstanciaNight);
         }
       }
@@ -1641,7 +1680,7 @@ function Cuadro() {
                           paddingTop: 0,
                         }}
                       >
-                        {medicamento.hora}
+                        {medicamento.horanoche}
                       </p>
                     ))}
                   </div>
@@ -1876,8 +1915,116 @@ function Cuadro() {
             textAlign:'center',
             marginTop:0
           }}>
+            {cualquieraMedicamento && Array.isArray(cualquieraMedicamento) &&
+                      cualquieraMedicamento.slice(0, 4).map((medicamento, index) => (
+                      <p
+                        key={index}
+                        style={{
+                          padding: 0,
+                          marginBottom: 8,
+                          marginTop: 0,
+                          paddingTop: 0,
+                        }}
+                      >
+                        {medicamento.nombreMedicina}
+                      </p>
+                    ))}
             
-            <p  style={{padding:0, marginBottom:8, marginTop:0, paddingTop:0}}></p>
+            
+            
+            </div>
+          <div  style={{
+            backgroundColor: "rgb(230, 251, 244)",
+            marginBottom: 2,
+            height: 30,
+            textAlign:'center',
+            marginTop:0
+          }}></div>
+          <div  style={{
+            backgroundColor: "rgb(199, 233, 217)",
+            marginBottom: 2,
+            height: 30,
+            textAlign:'center',
+            marginTop:0
+          }}></div>
+          <div  style={{
+            backgroundColor: "rgb(230, 251, 244)",
+            marginBottom: 2,
+            height: 30,
+            textAlign:'center',
+            marginTop:0
+          }}></div>
+      </td>
+      <td>
+      <div  style={{
+            backgroundColor: "rgb(199, 233, 217)",
+            marginBottom: 2,
+            height: 30,
+            textAlign:'center',
+            marginTop:0
+          }}>
+            {cualquieraMedicamento && Array.isArray(cualquieraMedicamento) &&
+                      cualquieraMedicamento.slice(0, 4).map((medicamento, index) => (
+                      <p
+                        key={index}
+                        style={{
+                          padding: 0,
+                          marginBottom: 8,
+                          marginTop: 0,
+                          paddingTop: 0,
+                        }}
+                      >
+                        {medicamento.dosis}
+                      </p>
+                    ))}
+            
+            
+            </div>
+          <div  style={{
+            backgroundColor: "rgb(230, 251, 244)",
+            marginBottom: 2,
+            height: 30,
+            textAlign:'center',
+            marginTop:0
+          }}></div>
+          <div  style={{
+            backgroundColor: "rgb(199, 233, 217)",
+            marginBottom: 2,
+            height: 30,
+            textAlign:'center',
+            marginTop:0
+          }}></div>
+          <div  style={{
+            backgroundColor: "rgb(230, 251, 244)",
+            marginBottom: 2,
+            height: 30,
+            textAlign:'center',
+            marginTop:0
+          }}></div>
+      </td>
+      <td>
+      <div  style={{
+            backgroundColor: "rgb(199, 233, 217)",
+            marginBottom: 2,
+            height: 30,
+            textAlign:'center',
+            marginTop:0
+          }}>
+            {cualquieraMedicamento && Array.isArray(cualquieraMedicamento) &&
+                      cualquieraMedicamento.slice(0, 4).map((medicamento, index) => (
+                      <p
+                        key={index}
+                        style={{
+                          padding: 0,
+                          marginBottom: 8,
+                          marginTop: 0,
+                          paddingTop: 0,
+                        }}
+                      >
+                        {medicamento.horacualquiera}
+                      </p>
+                    ))}
+            
             
             </div>
           <div  style={{
@@ -1911,8 +2058,20 @@ function Cuadro() {
             marginTop:0
           }}>
             
-            <p  style={{padding:0, marginBottom:8, marginTop:0, paddingTop:0}}></p>
-            
+            {cualquieraMedicamento && Array.isArray(cualquieraMedicamento) &&
+                      cualquieraMedicamento.slice(0, 4).map((medicamento, index) => (
+                      <p
+                        key={index}
+                        style={{
+                          padding: 0,
+                          marginBottom: 8,
+                          marginTop: 0,
+                          paddingTop: 0,
+                        }}
+                      >
+                        {medicamento.fecha}
+                      </p>
+                    ))}           
             </div>
           <div  style={{
             backgroundColor: "rgb(230, 251, 244)",
@@ -1945,76 +2104,20 @@ function Cuadro() {
             marginTop:0
           }}>
             
-            <p  style={{padding:0, marginBottom:8, marginTop:0, paddingTop:0}}></p>
-            
-            </div>
-          <div  style={{
-            backgroundColor: "rgb(230, 251, 244)",
-            marginBottom: 2,
-            height: 30,
-            textAlign:'center',
-            marginTop:0
-          }}></div>
-          <div  style={{
-            backgroundColor: "rgb(199, 233, 217)",
-            marginBottom: 2,
-            height: 30,
-            textAlign:'center',
-            marginTop:0
-          }}></div>
-          <div  style={{
-            backgroundColor: "rgb(230, 251, 244)",
-            marginBottom: 2,
-            height: 30,
-            textAlign:'center',
-            marginTop:0
-          }}></div>
-      </td>
-      <td>
-      <div  style={{
-            backgroundColor: "rgb(199, 233, 217)",
-            marginBottom: 2,
-            height: 30,
-            textAlign:'center',
-            marginTop:0
-          }}>
-            
-            <p  style={{padding:0, marginBottom:8, marginTop:0, paddingTop:0}}></p>
-           
-            </div>
-          <div  style={{
-            backgroundColor: "rgb(230, 251, 244)",
-            marginBottom: 2,
-            height: 30,
-            textAlign:'center',
-            marginTop:0
-          }}></div>
-          <div  style={{
-            backgroundColor: "rgb(199, 233, 217)",
-            marginBottom: 2,
-            height: 30,
-            textAlign:'center',
-            marginTop:0
-          }}></div>
-          <div  style={{
-            backgroundColor: "rgb(230, 251, 244)",
-            marginBottom: 2,
-            height: 30,
-            textAlign:'center',
-            marginTop:0
-          }}></div>
-      </td>
-      <td>
-      <div  style={{
-            backgroundColor: "rgb(199, 233, 217)",
-            marginBottom: 2,
-            height: 30,
-            textAlign:'center',
-            marginTop:0
-          }}>
-            
-            <p  style={{padding:0, marginBottom:8, marginTop:0, paddingTop:0}}></p>
-            
+            {cualquieraMedicamento && Array.isArray(cualquieraMedicamento) &&
+                      cualquieraMedicamento.slice(0, 4).map((medicamento, index) => (
+                      <p
+                        key={index}
+                        style={{
+                          padding: 0,
+                          marginBottom: 8,
+                          marginTop: 0,
+                          paddingTop: 0,
+                        }}
+                      >
+                        {medicamento.comentarios}
+                      </p>
+                    ))}            
             </div>
           <div  style={{
             backgroundColor: "rgb(230, 251, 244)",
@@ -2048,8 +2151,8 @@ function Cuadro() {
                       marginTop: 0,
                     }}
                   >
-                    {nocheMedicamento && Array.isArray(nocheMedicamento) &&
-                      nocheMedicamento.slice(0, 4).map((medicamento, index) => (
+                    {cualquieraMedicamento && Array.isArray(cualquieraMedicamento) &&
+                      cualquieraMedicamento.slice(0, 4).map((medicamento, index) => (
                       <button
                         style={{ display: "flex" }}
                         key={index}

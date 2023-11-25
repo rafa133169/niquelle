@@ -2,14 +2,14 @@ const conecction = require("../database");
 const connection = require("../database");
 
 const obtenerCualquiera = (req, res) => {
-    conecction.query('SELECT*FROM cualquiera', (error, results) =>{
+    conecction.query('SELECT cualquiera.*, medicamentos.*  FROM cualquiera JOIN medicamentos WHERE cualquiera.id_medic = medicamentos.id_medicina', (error, results) =>{
         if(error){
             console.error('Error al obtener los medicamentos', error);
             res.status(500).json({
                 error:'Error al obtener medicamentos'
             });
         }else{
-            res.json(results);
+            res.json({listacualquiera: results});
         }
     });
 };
