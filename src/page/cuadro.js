@@ -230,7 +230,7 @@ function Cuadro() {
           })
           nuevosMedicamentosMediodia.push(nuevaInstanciaMediodia);
           
-        } else if (horaIncrementada >= 18 || horaIncrementada < 0) {
+        } else if (horaIncrementada >= 18 || horaIncrementada < 20) {
           const nuevaInstanciaTarde = {
             ...medicamento,
             hora: `${
@@ -240,9 +240,7 @@ function Cuadro() {
           };
           Axios.post('http://localhost:3001/tarde', {
             id_medic: nuevaInstanciaTarde.id_medicina,
-            hora: `${
-              horaIncrementada < 10 ? "0" : ""
-            }${horaIncrementada}:00:00`,
+            hora: nuevaInstanciaTarde.hora,
             fecha: nuevaInstanciaTarde.fecha,
             estatus: 0  // Aquí estás enviando el estado actual del checkbox
           }).then(() => {
