@@ -34,7 +34,9 @@ function Cuadro() {
   const [mediodiaMedicamento, setMediodiaMedicamento] = useState ([]);
   const [medicamentosTarde, setMedicamentosTarde] = useState([]);
   const [medicamentosRestantes, setMedicamentosRestantes] = useState([]);
+  const [morningMedicamento, setMorningMedicamento] = useState([]);
   const [nocheMedicamento, setNocheMedicamento] = useState([]);
+  const [tardeMedicamento, setTardeMedicamento] = useState([]);
   const [tablaMedicamentosToma0, setTablaMedicamentosToma0] = useState([]);
   const [fecha, setFecha] = useState(
     window.localStorage.getItem("fecha") || null
@@ -70,7 +72,50 @@ function Cuadro() {
         console.error("Error al configurar la solicitud:", error.message);
       }}
     }, []);
-  
+    useEffect(() => {
+      try {
+        // Tu código Axios aquí
+        Axios.get(`http://localhost:3001/morning`)
+        .then((respuesta) => {
+          setMorningMedicamento(respuesta.data.listamorning);
+        })
+        .catch((error) => console.error(error));
+    
+      } catch (error) {
+        if (error.response) {
+          // La solicitud fue realizada y el servidor respondió con un código de estado diferente de 2xx
+          console.error("Error de respuesta del servidor:", error.response.data);
+        } else if (error.request) {
+          // La solicitud fue realizada, pero no se recibió una respuesta
+          console.error("No se recibió respuesta del servidor");
+        } else {
+          // Algo sucedió en la configuración de la solicitud que desencadenó un error
+          console.error("Error al configurar la solicitud:", error.message);
+        }}
+      }, []);
+
+    useEffect(() => {
+      try {
+        // Tu código Axios aquí
+        Axios.get(`http://localhost:3001/tarde`)
+        .then((respuesta) => {
+          setTardeMedicamento(respuesta.data.listatarde);
+        })
+        .catch((error) => console.error(error));
+    
+      } catch (error) {
+        if (error.response) {
+          // La solicitud fue realizada y el servidor respondió con un código de estado diferente de 2xx
+          console.error("Error de respuesta del servidor:", error.response.data);
+        } else if (error.request) {
+          // La solicitud fue realizada, pero no se recibió una respuesta
+          console.error("No se recibió respuesta del servidor");
+        } else {
+          // Algo sucedió en la configuración de la solicitud que desencadenó un error
+          console.error("Error al configurar la solicitud:", error.message);
+        }}
+      }, []);
+    
 
     useEffect(() => {
       try {
@@ -162,6 +207,16 @@ function Cuadro() {
             }${horaIncrementada}:00:00`, // Formatear la hora (agregar 24 para convertir horas negativas a positivas)
             fecha: fechaSiguiente.toLocaleDateString(), // Actualizar la fecha si es necesario
           };
+          Axios.post('http://localhost:3001/tarde', {
+            id_medic: nuevaInstanciaTarde.id_medicina,
+            hora: `${
+              horaIncrementada < 10 ? "0" : ""
+            }${horaIncrementada}:00:00`,
+            fecha: nuevaInstanciaTarde.fecha,
+            estatus: 0  // Aquí estás enviando el estado actual del checkbox
+          }).then(() => {
+            console.log("Medicamento agregado")
+          })
           nuevosMedicamentosTarde.push(nuevaInstanciaTarde);
         } else {
           const nuevaInstanciaNight = {
@@ -1126,7 +1181,8 @@ function Cuadro() {
                       marginTop: 0,
                     }}
                   >
-                    {medicamentosTarde.slice(0, 4).map((medicamento, index) => (
+                    {tardeMedicamento && Array.isArray(tardeMedicamento) &&
+                    tardeMedicamento.slice(0, 4).map((medicamento, index) => (
                       <p
                         key={index}
                         style={{
@@ -1178,7 +1234,8 @@ function Cuadro() {
                       marginTop: 0,
                     }}
                   >
-                    {medicamentosTarde.slice(0, 4).map((medicamento, index) => (
+                    {tardeMedicamento && Array.isArray(tardeMedicamento) &&
+                    tardeMedicamento.slice(0, 4).map((medicamento, index) => (
                       <p
                         key={index}
                         style={{
@@ -1230,7 +1287,8 @@ function Cuadro() {
                       marginTop: 0,
                     }}
                   >
-                    {medicamentosTarde.slice(0, 4).map((medicamento, index) => (
+                    {tardeMedicamento && Array.isArray(tardeMedicamento) &&
+                    tardeMedicamento.slice(0, 4).map((medicamento, index) => (
                       <p
                         key={index}
                         style={{
@@ -1240,7 +1298,7 @@ function Cuadro() {
                           paddingTop: 0,
                         }}
                       >
-                        {medicamento.hora}
+                        {medicamento.horatarde}
                       </p>
                     ))}
                   </div>
@@ -1282,7 +1340,8 @@ function Cuadro() {
                       marginTop: 0,
                     }}
                   >
-                    {medicamentosTarde.slice(0, 4).map((medicamento, index) => (
+                    {tardeMedicamento && Array.isArray(tardeMedicamento) &&
+                    tardeMedicamento.slice(0, 4).map((medicamento, index) => (
                       <p
                         key={index}
                         style={{
@@ -1334,7 +1393,8 @@ function Cuadro() {
                       marginTop: 0,
                     }}
                   >
-                    {medicamentosTarde.slice(0, 4).map((medicamento, index) => (
+                    {tardeMedicamento && Array.isArray(tardeMedicamento) &&
+                    tardeMedicamento.slice(0, 4).map((medicamento, index) => (
                       <p
                         key={index}
                         style={{
@@ -1386,7 +1446,8 @@ function Cuadro() {
                       marginTop: 0,
                     }}
                   >
-                    {medicamentosTarde.slice(0, 4).map((medicamento, index) => (
+                    {tardeMedicamento && Array.isArray(tardeMedicamento) &&
+                    tardeMedicamento.slice(0, 4).map((medicamento, index) => (
                       <button
                         style={{ display: "flex" }}
                         key={index}

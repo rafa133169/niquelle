@@ -65,9 +65,9 @@ function CuandoQuiera() {
             textAlign:'center',
             marginTop:0
           }}>
-            {medicamentosSeleccionados.map ((medicamento) =>(
-            <p key={medicamento.id_medicina} style={{padding:0, marginBottom:8, marginTop:0, paddingTop:0}}>{medicamento.nombreMedicina}</p>
-            ))}
+            
+            <p key={medicamento.id_medicina} style={{padding:0, marginBottom:8, marginTop:0, paddingTop:0}}></p>
+            
             </div>
           <div  style={{
             backgroundColor: "rgb(230, 251, 244)",
@@ -99,9 +99,9 @@ function CuandoQuiera() {
             textAlign:'center',
             marginTop:0
           }}>
-            {medicamentosSeleccionados.map ((medicamento) =>(
-            <p key={medicamento.id_medicina} style={{padding:0, marginBottom:8, marginTop:0, paddingTop:0}}>{medicamento.dosis}</p>
-            ))}
+            
+            <p key={medicamento.id_medicina} style={{padding:0, marginBottom:8, marginTop:0, paddingTop:0}}></p>
+            
             </div>
           <div  style={{
             backgroundColor: "rgb(230, 251, 244)",
@@ -133,9 +133,9 @@ function CuandoQuiera() {
             textAlign:'center',
             marginTop:0
           }}>
-            {hora && medicamentosSeleccionados.map ((medicamento) =>(
-            <p key={medicamento.id_medicina} style={{padding:0, marginBottom:8, marginTop:0, paddingTop:0}}>{hora}</p>
-            ))}
+            
+            <p key={medicamento.id_medicina} style={{padding:0, marginBottom:8, marginTop:0, paddingTop:0}}></p>
+            
             </div>
           <div  style={{
             backgroundColor: "rgb(230, 251, 244)",
@@ -167,9 +167,9 @@ function CuandoQuiera() {
             textAlign:'center',
             marginTop:0
           }}>
-            {fecha && medicamentosSeleccionados.map ((medicamento) =>(
-            <p key={medicamento.id_medicina} style={{padding:0, marginBottom:8, marginTop:0, paddingTop:0}}>{fecha}</p>
-            ))}
+            
+            <p key={medicamento.id_medicina} style={{padding:0, marginBottom:8, marginTop:0, paddingTop:0}}></p>
+           
             </div>
           <div  style={{
             backgroundColor: "rgb(230, 251, 244)",
@@ -201,9 +201,9 @@ function CuandoQuiera() {
             textAlign:'center',
             marginTop:0
           }}>
-            {medicamentosSeleccionados.map ((medicamento) =>(
-            <p key={medicamento.id_medicina} style={{padding:0, marginBottom:8, marginTop:0, paddingTop:0}}>{medicamento.comentarios}</p>
-            ))}
+            
+            <p key={medicamento.id_medicina} style={{padding:0, marginBottom:8, marginTop:0, paddingTop:0}}></p>
+            
             </div>
           <div  style={{
             backgroundColor: "rgb(230, 251, 244)",

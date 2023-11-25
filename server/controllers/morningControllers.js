@@ -2,14 +2,14 @@ const conecction = require("../database");
 const connection = require("../database");
 
 const obtenerMorning = (req, res) => {
-    conecction.query('SELECT*FROM morning', (error, results) =>{
+    conecction.query('SELECT morning.*, medicamentos.*  FROM morning JOIN medicamentos WHERE morning.id_medic = medicamentos.id_medicina', (error, results) =>{
         if(error){
             console.error('Error al obtener los medicamentos de mañana', error);
             res.status(500).json({
                 error:'Error al obtener medicamentos de medicina'
             });
         }else{
-            res.json(results);
+            res.json({listamorning: results});
         }
     });
 };

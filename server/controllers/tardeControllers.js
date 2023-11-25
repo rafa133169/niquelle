@@ -2,14 +2,14 @@ const conecction = require("../database");
 const connection = require("../database");
 
 const obtenerTarde = (req, res) => {
-    conecction.query('SELECT*FROM tarde', (error, results) =>{
+    conecction.query('SELECT tarde.*, medicamentos.*  FROM tarde JOIN medicamentos WHERE tarde.id_medic = medicamentos.id_medicina', (error, results) =>{
         if(error){
             console.error('Error al obtener los medicamentos', error);
             res.status(500).json({
                 error:'Error al obtener medicamentos'
             });
         }else{
-            res.json(results);
+            res.json({listatarde: results});
         }
     });
 };
@@ -28,7 +28,7 @@ const obtenerTardeId = (req, res) => {
 
 const insertarTarde = (req, res) => {
     const {id_medic, hora, fecha, estatus} = req.body;
-    connection.query('INSERT INTO tarde (id_medic, hora, fecha, estatus) VALUES (?, ?, ?, ?)', [id_medic, hora, fecha, estatus], (error, results) =>{
+    connection.query('INSERT INTO tarde (id_medic, horatarde, fecha, estatus) VALUES (?, ?, ?, ?)', [id_medic, hora, fecha, estatus], (error, results) =>{
         if(error){
             console.error('Error al insertar el medicamento', error);
             res.status(500).json({error:'Error al agregar medicina'});
