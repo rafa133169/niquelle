@@ -12,30 +12,8 @@ function Formulario() {
   const fechaMySQL = new Date().toISOString().slice(0, 10);
 
   const agregarMedicamento = (e) => {
-    e.preventDefault();
-    if(estatus){
-      Axios.post("http://localhost:3001/cualquiera", {
-        nombreMedicina: medicamento,
-        dosis: dosis,
-        toma: toma,
-        dia: dia,
-        hora: new Date().toLocaleTimeString("es-ES"),
-        fecha: fechaMySQL,
-        comentarios: comentarios,
-        estatus: estatus, // Aquí estás enviando el estado actual del checkbox
-      }).then(() => {
-        console.log("Medicamento agregado");
-      });
-      setMedicamento("");
-      setDosis("");
-      setToma("");
-      setDia("");
-      setComentarios("");
-      setEstatus(false);
-
-    }
-    else{
     
+    e.preventDefault();
     Axios.post("http://localhost:3001/medicina", {
       nombreMedicina: medicamento,
       dosis: dosis,
@@ -54,7 +32,6 @@ function Formulario() {
     setDia("");
     setComentarios("");
     setEstatus(false);
-  }
   };
 
   return (
