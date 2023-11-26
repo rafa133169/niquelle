@@ -1548,36 +1548,46 @@ function Cuadro() {
                   >
                     {tardeMedicamento &&
                       Array.isArray(tardeMedicamento) &&
-                      tardeMedicamento.slice(0, 4).map((medicamento, index) => {
-                        const horaDelMedicamento = new Date(
-                          `2000-01-01T${medicamento.horatarde}`
+                      tardeMedicamento.slice(0, 4).map((medicamento, index) => { 
+
+                        return (
+                          <div key={index}>
+                            {tardeMedicamento ? (
+                              tardeMedicamento.map((med, idx) => {
+                                const currentTime = new Date();
+                                const currentYear = currentTime.getFullYear();
+                                const currentMonth = currentTime.getMonth() + 1;
+                                const currentDay = currentTime.getDate();
+                                const horaProgramada = new Date(
+                                  `${currentYear}-${currentMonth}-${currentDay} ${med.horatarde}`
+                                );
+
+                                // Comprueba si la hora actual es mayor que la hora programada
+                                const showButtonTomado =
+                                  currentTime > horaProgramada;
+
+                                return (
+                                  <p key={idx} className="h-15">
+                                    
+                                    {showButtonTomado && (
+                                      <button
+                                      style={{ display: "flex" }}
+                                      onClick={() => {
+                                        agregarMedicamento(medicamento);
+                                        window.location.reload();
+                                      }}
+                                    >
+                                      Tomar
+                                    </button>
+                                    )}
+                                  </p>
+                                );
+                              })
+                            ) : (
+                              <p>CARGANDO DATOS...</p>
+                            )}
+                          </div>
                         );
-                        const horaActual = new Date();
-
-                        // Ajustar a la misma zona horaria
-                        horaDelMedicamento.setHours(
-                          horaActual.getHours(),
-                          horaActual.getMinutes(),
-                          horaActual.getSeconds()
-                        );
-
-                        const diferenciaHora =
-                          (horaDelMedicamento - horaActual) / (1000 * 60 * 60); // Diferencia en horas
-
-                        const mostrarBoton = horaDelMedicamento < horaActual;
-                        console.log(mostrarBoton)
-                        return mostrarBoton ? (
-                          <button
-                            style={{ display: "flex" }}
-                            key={index}
-                            onClick={() => {
-                              agregarMedicamento(medicamento);
-                              window.location.reload();
-                            }}
-                          >
-                            Tomar
-                          </button>
-                        ) : null;
                       })}
                   </div>
                   <div
