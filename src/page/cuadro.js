@@ -404,7 +404,7 @@ function Cuadro() {
                     <p style={{ backgroundColor: "blue" }}>
                       {medicamento.nombreMedicina}
                     </p>
-                    <button onClick={() => agregarMedicamento(medicamento)}>
+                    <button onClick={() => {agregarMedicamento(medicamento);window.location.reload();}}>
                       Tomar
                     </button>
                   </div>
@@ -744,17 +744,28 @@ function Cuadro() {
                   >
                     {morningMedicamento &&
                       Array.isArray(morningMedicamento) &&
-                      morningMedicamento
-                        .slice(0, 4)
-                        .map((medicamento, index) => (
+                      morningMedicamento.slice(0, 4).map((medicamento, index) => {
+                        const horaDelMedicamento = new Date(
+                          `2000-01-01T${medicamento.horamorning}`
+                        );
+                        const horaActual = new Date();
+                        const diferenciaHora =
+                          (horaDelMedicamento - horaActual) / (1000 * 60 * 60); // Diferencia en horas
+
+                        const mostrarBoton = diferenciaHora <= 0;
+                        return mostrarBoton ? (
                           <button
                             style={{ display: "flex" }}
                             key={index}
-                            onClick={() => agregarMedicamento(medicamento)}
+                            onClick={() => {
+                              agregarMedicamento(medicamento);
+                              window.location.reload();
+                            }}
                           >
                             Tomar
                           </button>
-                        ))}
+                        ) : null;
+                      })}
                   </div>
                   <div
                     style={{
@@ -1143,16 +1154,24 @@ function Cuadro() {
                       mediodiaMedicamento
                         .slice(0, 4)
                         .map((medicamento, index) => {
-                          const horaDelMedicamento = medicamento.horamediodia;
-                          const horaActual = new Date().getHours();
+                          const horaDelMedicamento = new Date(
+                            `2000-01-01T${medicamento.horamediodia}`
+                          );
+                          const horaActual = new Date();
                           const diferenciaHora =
-                            horaDelMedicamento - horaActual;
-                          const mostrarBoton = diferenciaHora < 0;
+                            (horaDelMedicamento - horaActual) /
+                            (1000 * 60 * 60); // Diferencia en horas
+
+                          const mostrarBoton = diferenciaHora <= 0;
+
                           return mostrarBoton ? (
                             <button
                               style={{ display: "flex" }}
                               key={index}
-                              onClick={() => agregarMedicamento(medicamento)}
+                              onClick={() => {
+                                agregarMedicamento(medicamento);
+                                window.location.reload();
+                              }}
                             >
                               Tomar
                             </button>
@@ -1535,7 +1554,10 @@ function Cuadro() {
                           <button
                             style={{ display: "flex" }}
                             key={index}
-                            onClick={() => agregarMedicamento(medicamento)}
+                            onClick={() => {
+                              agregarMedicamento(medicamento);
+                              window.location.reload();
+                            }}
                           >
                             Tomar
                           </button>
@@ -1900,13 +1922,14 @@ function Cuadro() {
                           (horaDelMedicamento - horaActual) / (1000 * 60 * 60); // Diferencia en horas
 
                         const mostrarBoton = diferenciaHora <= 0;
-
-
                         return mostrarBoton ? (
                           <button
                             style={{ display: "flex" }}
                             key={index}
-                            onClick={() => agregarMedicamento(medicamento)}
+                            onClick={() => {
+                              agregarMedicamento(medicamento);
+                              window.location.reload();
+                            }}
                           >
                             Tomar
                           </button>
@@ -2278,20 +2301,16 @@ function Cuadro() {
                       cualquieraMedicamento
                         .slice(0, 4)
                         .map((medicamento, index) => {
-                          const horaDelMedicamento = medicamento.hora;
-                          const horaActual = new Date().getHours();
-                          const diferenciaHora =
-                            horaDelMedicamento - horaActual;
-                          const mostrarBoton = diferenciaHora < 0;
-                          return mostrarBoton ? (
-                            <button
-                              style={{ display: "flex" }}
-                              key={index}
-                              onClick={() => agregarMedicamento(medicamento)}
-                            >
-                              Tomar
-                            </button>
-                          ) : null;
+                          <button
+                            style={{ display: "flex" }}
+                            key={index}
+                            onClick={() => {
+                              agregarMedicamento(medicamento);
+                              window.location.reload();
+                            }}
+                          >
+                            Tomar
+                          </button>;
                         })}
                   </div>
                   <div
