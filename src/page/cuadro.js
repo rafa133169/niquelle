@@ -188,8 +188,23 @@ function Cuadro() {
         if (horaIncrementada < horaActual) {
           fechaSiguiente.setDate(fechaActual.getDate() + 1); // Cambiar a la siguiente fecha
         }
-
-        if (horaIncrementada >= 6 && horaIncrementada < 12) {
+        if(medicamento.estatus === 1){
+          const nuevaInstanciaCualquiera = {
+            ...medicamento,
+            hora: `${
+              horaIncrementada < 10 ? "0" : ""
+            }${horaIncrementada}:00:00`, // Formatear la hora
+            fecha: fechaSiguiente.toLocaleDateString(), // Actualizar la fecha si es necesario
+          };
+            
+            Axios.post('http://localhost:3001/cualquiera', {
+            id_medic: nuevaInstanciaCualquiera.id_medicina,
+            estatus: 1  // Aquí estás enviando el estado actual del checkbox
+          }).then(() => {
+            console.log("Medicamento agregado")
+          })
+        }
+        else if (horaIncrementada >= 6 && horaIncrementada < 12) {
           const nuevaInstanciaMorning = {
             ...medicamento,
             hora: `${
