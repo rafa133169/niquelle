@@ -361,19 +361,19 @@ function Cuadro() {
                 marginBottom: 20,
               }}
             >
-              {medicamentosNight.some(
+              {nocheMedicamento.some(
                 (seleccionado) =>
                   seleccionado.id_medicina === medicamento.id_medicina
               ) ||
-              medicamentosMorning.some(
+              morningMedicamento.some(
                 (seleccionado) =>
                   seleccionado.id_medicina === medicamento.id_medicina
               ) ||
-              medicamentosMediodia.some(
+              mediodiaMedicamento.some(
                 (seleccionado) =>
                   seleccionado.id_medicina === medicamento.id_medicina
               ) ||
-              medicamentosTarde.some(
+              tardeMedicamento.some(
                 (seleccionado) =>
                   seleccionado.id_medicina === medicamento.id_medicina
               ) ? (
