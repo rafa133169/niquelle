@@ -1474,15 +1474,21 @@ function Cuadro() {
                     }}
                   >
                     {tardeMedicamento && Array.isArray(tardeMedicamento) &&
-                    tardeMedicamento.slice(0, 4).map((medicamento, index) => (
-                      <button
-                        style={{ display: "flex" }}
-                        key={index}
-                        onClick={() => agregarMedicamento(medicamento)}
-                      >
-                        Tomar
-                      </button>
-                    ))}
+                      tardeMedicamento.slice(0, 4).map((medicamento, index) => {
+                        const horaDelMedicamento = medicamento.hora;
+                        const horaActual = new Date().getHours();
+                        const diferenciaHora = horaDelMedicamento - horaActual;
+                        const mostrarBoton = diferenciaHora < 0;
+                        return mostrarBoton ? (
+                          <button
+                            style={{ display: "flex" }}
+                            key={index}
+                            onClick={() => agregarMedicamento(medicamento)}
+                          >
+                            Tomar
+                          </button>
+                        ) : null;
+                      })}
                   </div>
                   <div
                     style={{
@@ -1827,15 +1833,21 @@ function Cuadro() {
                     }}
                   >
                     {nocheMedicamento && Array.isArray(nocheMedicamento) &&
-                      nocheMedicamento.slice(0, 4).map((medicamento, index) => (
-                      <button
-                        style={{ display: "flex" }}
-                        key={index}
-                        onClick={() => agregarMedicamento(medicamento)}
-                      >
-                        Tomar
-                      </button>
-                    ))}
+                      nocheMedicamento.slice(0, 4).map((medicamento, index) => {
+                        const horaDelMedicamento = medicamento.hora;
+                        const horaActual = new Date().getHours();
+                        const diferenciaHora = horaDelMedicamento - horaActual;
+                        const mostrarBoton = diferenciaHora < 0;
+                        return mostrarBoton ? (
+                          <button
+                            style={{ display: "flex" }}
+                            key={index}
+                            onClick={() => agregarMedicamento(medicamento)}
+                          >
+                            Tomar
+                          </button>
+                        ) : null;
+                      })}
                   </div>
                   <div
                     style={{
@@ -2019,7 +2031,7 @@ function Cuadro() {
                           paddingTop: 0,
                         }}
                       >
-                        {medicamento.horacualquiera}
+                        No se necesita un horario
                       </p>
                     ))}
             
@@ -2067,7 +2079,7 @@ function Cuadro() {
                           paddingTop: 0,
                         }}
                       >
-                        {medicamento.fecha}
+                        No es necesaria la fecha
                       </p>
                     ))}           
             </div>
@@ -2150,15 +2162,21 @@ function Cuadro() {
                     }}
                   >
                     {cualquieraMedicamento && Array.isArray(cualquieraMedicamento) &&
-                      cualquieraMedicamento.slice(0, 4).map((medicamento, index) => (
-                      <button
-                        style={{ display: "flex" }}
-                        key={index}
-                        onClick={() => agregarMedicamento(medicamento)}
-                      >
-                        Tomar
-                      </button>
-                    ))}
+                      cualquieraMedicamento.slice(0, 4).map((medicamento, index) => {
+                        const horaDelMedicamento = medicamento.hora;
+                        const horaActual = new Date().getHours();
+                        const diferenciaHora = horaDelMedicamento - horaActual;
+                        const mostrarBoton = diferenciaHora < 0;
+                        return mostrarBoton ? (
+                          <button
+                            style={{ display: "flex" }}
+                            key={index}
+                            onClick={() => agregarMedicamento(medicamento)}
+                          >
+                            Tomar
+                          </button>
+                        ) : null;
+                      })}
                   </div>
                   <div
                     style={{
