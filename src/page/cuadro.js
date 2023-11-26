@@ -749,31 +749,47 @@ function Cuadro() {
                   >
                     {morningMedicamento &&
                       Array.isArray(morningMedicamento) &&
-                      morningMedicamento
-                        .slice(0, 4)
-                        .map((medicamento, index) => {
-                          const horaDelMedicamento = new Date(
-                            `2000-01-01T${medicamento.horamorning}`
-                          );
-                          const horaActual = new Date();
-                          const diferenciaHora =
-                            (horaDelMedicamento - horaActual) /
-                            (1000 * 60 * 60); // Diferencia en horas
+                      morningMedicamento.slice(0, 4).map((medicamento, index) => { 
 
-                          const mostrarBoton = diferenciaHora <= 0;
-                          return mostrarBoton ? (
-                            <button
-                              style={{ display: "flex" }}
-                              key={index}
-                              onClick={() => {
-                                agregarMedicamento(medicamento);
-                                window.location.reload();
-                              }}
-                            >
-                              Tomar
-                            </button>
-                          ) : null;
-                        })}
+                        return (
+                          <p key={index}>
+                            {morningMedicamento ? (
+                              morningMedicamento.map((med, idx) => {
+                                const currentTime = new Date();
+                                const currentYear = currentTime.getFullYear();
+                                const currentMonth = currentTime.getMonth() + 1;
+                                const currentDay = currentTime.getDate();
+                                const horaProgramada = new Date(
+                                  `${currentYear}-${currentMonth}-${currentDay} ${med.horamorning}`
+                                );
+
+                                // Comprueba si la hora actual es mayor que la hora programada
+                                const showButtonTomado =
+                                  currentTime > horaProgramada;
+
+                                return (
+                                  <p key={idx} className="h-15">
+                                    
+                                    {showButtonTomado && (
+                                      <button
+                                      style={{ display: "flex" }}
+                                      onClick={() => {
+                                        agregarMedicamento(medicamento);
+                                        window.location.reload();
+                                      }}
+                                    >
+                                      Tomar
+                                    </button>
+                                    )}
+                                  </p>
+                                );
+                              })
+                            ) : (
+                              <p>CARGANDO DATOS...</p>
+                            )}
+                          </p>
+                        );
+                      })}
                   </div>
                   <div
                     style={{
@@ -1159,32 +1175,47 @@ function Cuadro() {
                   >
                     {mediodiaMedicamento &&
                       Array.isArray(mediodiaMedicamento) &&
-                      mediodiaMedicamento
-                        .slice(0, 4)
-                        .map((medicamento, index) => {
-                          const horaDelMedicamento = new Date(
-                            `2000-01-01T${medicamento.horamediodia}`
-                          );
-                          const horaActual = new Date();
-                          const diferenciaHora =
-                            (horaDelMedicamento - horaActual) /
-                            (1000 * 60 * 60); // Diferencia en horas
+                      mediodiaMedicamento.slice(0, 4).map((medicamento, index) => { 
 
-                          const mostrarBoton = diferenciaHora <= 0;
+                        return (
+                          <p key={index}>
+                            {mediodiaMedicamento ? (
+                              mediodiaMedicamento.map((med, idx) => {
+                                const currentTime = new Date();
+                                const currentYear = currentTime.getFullYear();
+                                const currentMonth = currentTime.getMonth() + 1;
+                                const currentDay = currentTime.getDate();
+                                const horaProgramada = new Date(
+                                  `${currentYear}-${currentMonth}-${currentDay} ${med.horamediodia}`
+                                );
 
-                          return mostrarBoton ? (
-                            <button
-                              style={{ display: "flex" }}
-                              key={index}
-                              onClick={() => {
-                                agregarMedicamento(medicamento);
-                                window.location.reload();
-                              }}
-                            >
-                              Tomar
-                            </button>
-                          ) : null;
-                        })}
+                                // Comprueba si la hora actual es mayor que la hora programada
+                                const showButtonTomado =
+                                  currentTime > horaProgramada;
+
+                                return (
+                                  <p key={idx} className="h-15">
+                                    
+                                    {showButtonTomado && (
+                                      <button
+                                      style={{ display: "flex" }}
+                                      onClick={() => {
+                                        agregarMedicamento(medicamento);
+                                        window.location.reload();
+                                      }}
+                                    >
+                                      Tomar
+                                    </button>
+                                    )}
+                                  </p>
+                                );
+                              })
+                            ) : 
+                              null
+                            }
+                          </p>
+                        );
+                      })}
                   </div>
                   <div
                     style={{
@@ -1939,27 +1970,46 @@ function Cuadro() {
                   >
                     {nocheMedicamento &&
                       Array.isArray(nocheMedicamento) &&
-                      nocheMedicamento.slice(0, 4).map((medicamento, index) => {
-                        const horaDelMedicamento = new Date(
-                          `2000-01-01T${medicamento.horanoche}`
-                        );
-                        const horaActual = new Date();
-                        const diferenciaHora =
-                          (horaDelMedicamento - horaActual) / (1000 * 60 * 60); // Diferencia en horas
+                      nocheMedicamento.slice(0, 4).map((medicamento, index) => { 
 
-                        const mostrarBoton = diferenciaHora <= 0;
-                        return mostrarBoton ? (
-                          <button
-                            style={{ display: "flex" }}
-                            key={index}
-                            onClick={() => {
-                              agregarMedicamento(medicamento);
-                              window.location.reload();
-                            }}
-                          >
-                            Tomar
-                          </button>
-                        ) : null;
+                        return (
+                          <p key={index}>
+                            {nocheMedicamento ? (
+                              nocheMedicamento.map((med, idx) => {
+                                const currentTime = new Date();
+                                const currentYear = currentTime.getFullYear();
+                                const currentMonth = currentTime.getMonth() + 1;
+                                const currentDay = currentTime.getDate();
+                                const horaProgramada = new Date(
+                                  `${currentYear}-${currentMonth}-${currentDay} ${med.horanoche}`
+                                );
+
+                                // Comprueba si la hora actual es mayor que la hora programada
+                                const showButtonTomado =
+                                  currentTime > horaProgramada;
+
+                                return (
+                                  <p key={idx} className="h-15">
+                                    
+                                    {showButtonTomado && (
+                                      <button
+                                      style={{ display: "flex" }}
+                                      onClick={() => {
+                                        agregarMedicamento(medicamento);
+                                        window.location.reload();
+                                      }}
+                                    >
+                                      Tomar
+                                    </button>
+                                    )}
+                                  </p>
+                                );
+                              })
+                            ) : (
+                              <p>CARGANDO DATOS...</p>
+                            )}
+                          </p>
+                        );
                       })}
                   </div>
                   <div
